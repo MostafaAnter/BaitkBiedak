@@ -102,15 +102,15 @@ public class ItemsFragment extends Fragment {
         MenuItem item = menu.findItem(R.id.action_change_layoutManager);
         if (!isGridtView) {
             // change layout manager type
-            setRecyclerViewLayoutManager(LayoutManagerType.LINEAR_LAYOUT_MANAGER);
-
-            item.setIcon(R.drawable.ic_view_module_24dp);
-            isGridtView = true;
-        } else {
-            // change layout manager type
             setRecyclerViewLayoutManager(LayoutManagerType.GRID_LAYOUT_MANAGER);
 
             item.setIcon(R.drawable.ic_view_list_24dp);
+            isGridtView = true;
+        } else {
+            // change layout manager type
+            setRecyclerViewLayoutManager(LayoutManagerType.LINEAR_LAYOUT_MANAGER);
+
+            item.setIcon(R.drawable.ic_view_module_24dp);
             isGridtView = false;
         }
     }
@@ -134,7 +134,7 @@ public class ItemsFragment extends Fragment {
         // elements are laid out.
         mLayoutManager = new LinearLayoutManager(getActivity());
 
-        mCurrentLayoutManagerType = LayoutManagerType.GRID_LAYOUT_MANAGER;
+        mCurrentLayoutManagerType = LayoutManagerType.LINEAR_LAYOUT_MANAGER;
 
         if (savedInstanceState != null) {
             // Restore saved layout manager type.
@@ -167,19 +167,19 @@ public class ItemsFragment extends Fragment {
                 mLayoutManager = new GridLayoutManager(getActivity(), SPAN_COUNT);
                 mCurrentLayoutManagerType = LayoutManagerType.GRID_LAYOUT_MANAGER;
                 // my observer
-                type = 1;
+                type = 0;
                 break;
             case LINEAR_LAYOUT_MANAGER:
                 mLayoutManager = new LinearLayoutManager(getActivity());
                 mCurrentLayoutManagerType = LayoutManagerType.LINEAR_LAYOUT_MANAGER;
                 // my observer
-                type = 0;
+                type = 1;
                 break;
             default:
                 mLayoutManager = new LinearLayoutManager(getActivity());
                 mCurrentLayoutManagerType = LayoutManagerType.LINEAR_LAYOUT_MANAGER;
                 // my observer
-                type = 1;
+                type = 0;
         }
 
         mRecyclerView.setLayoutManager(mLayoutManager);

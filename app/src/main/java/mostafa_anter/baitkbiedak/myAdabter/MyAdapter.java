@@ -147,7 +147,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
         // Chcek for empty status message
         if (!TextUtils.isEmpty(mDataSet[position].getContent())) {
             viewHolder.getTextStatusMsg().setText(mDataSet[position].getContent());
-            if (ItemsFragment.type == 1) {
+            if (ItemsFragment.type == 0) {
                 viewHolder.getTextStatusMsg().setVisibility(View.GONE);
             }
 
@@ -162,7 +162,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
                     + mDataSet[position].getLinkAttachedWithContent() + "</a> "));
             // Making url clickable
             viewHolder.getTextUrl().setMovementMethod(LinkMovementMethod.getInstance());
-            if (ItemsFragment.type == 1) {
+            if (ItemsFragment.type == 0) {
                 viewHolder.getTextUrl().setVisibility(View.GONE);
             }
 

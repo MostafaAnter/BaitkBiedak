@@ -38,7 +38,7 @@
         app:showAsAction="always" />
     <item
         android:id="@+id/action_change_layoutManager"
-        android:icon="@drawable/ic_view_list_24dp"
+        android:icon="@drawable/ic_view_module_24dp"
         android:orderInCategory="100"
         android:title="@string/action_settings"
         app:showAsAction="always" />
