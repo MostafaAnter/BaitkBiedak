@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -25,6 +26,7 @@ import mostafa_anter.baitkbiedak.fragments.DetailsFragment;
 import mostafa_anter.baitkbiedak.fragments.ItemsFragment;
 import mostafa_anter.baitkbiedak.models.FeedPOJO;
 import mostafa_anter.baitkbiedak.utils.SquaredImageView;
+import mostafa_anter.baitkbiedak.utils.Utils;
 
 
 /**
@@ -34,6 +36,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     private static final String TAG = "CustomAdapter";
     private static Context mContext;
     private FeedPOJO[] mDataSet;
+
+    // manage enter animate
+    private static final int ANIMATED_ITEMS_COUNT = 2;
+    private int lastAnimatedPosition = -1;
+    private int itemsCount = 0;
+
 
 
 
@@ -138,6 +146,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(final ViewHolder viewHolder, final int position) {
         Log.d(TAG, "Element " + position + " set.");
+        // run enter animation
+        runEnterAnimation(viewHolder.itemView, position);
 
         // Get element from your dataset at this position and replace the contents of the view
         // with that element
@@ -204,6 +214,23 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
     @Override
     public int getItemCount() {
         return mDataSet.length;
+    }
+
+    // manage enter animation function
+    private void runEnterAnimation(View view, int position) {
+        if (position >= ANIMATED_ITEMS_COUNT - 1) {
+            return;
+        }
+
+        if (position > lastAnimatedPosition) {
+            lastAnimatedPosition = position;
+            view.setTranslationY(Utils.getScreenHeight(mContext));
+            view.animate()
+                    .translationY(0)
+                    .setInterpolator(new DecelerateInterpolator(3.f))
+                    .setDuration(700)
+                    .start();
+        }
     }
 
 
