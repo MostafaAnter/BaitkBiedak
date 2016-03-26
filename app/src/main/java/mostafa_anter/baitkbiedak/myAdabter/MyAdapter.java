@@ -7,6 +7,7 @@ import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
@@ -100,7 +101,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implem
     /**
      * Provide a reference to the type of views (custom ViewHolder)
      */
-    public static class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder{
         @Bind(R.id.main_title) TextView mainTitel;
         @Bind(R.id.timestamp) TextView timeStamp;
         @Bind(R.id.txtStatusMsg) TextView textStatusMsg;
@@ -121,7 +122,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implem
                     Log.d(TAG, "Element " + getPosition() + " clicked.");
                     if (MainActivity.mTwoPane) {
                         Bundle arguments = new Bundle();
-                        arguments.putString(DetailsFragment.ARG_ITEM_ID, getPosition() + "");
+                        arguments.putParcelable(DetailsFragment.ARG_ITEM_ID, mDataSet.get(getPosition()));
                         DetailsFragment fragment = new DetailsFragment();
                         fragment.setArguments(arguments);
                         ((FragmentActivity)mContext).getSupportFragmentManager().beginTransaction()
@@ -130,8 +131,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implem
                     } else {
                         Context context = v.getContext();
                         Intent intent = new Intent(context, DetailsActivity.class);
-                        intent.putExtra(DetailsFragment.ARG_ITEM_ID, getPosition());
-
+                        Bundle arguments = new Bundle();
+                        arguments.putParcelable(DetailsFragment.ARG_ITEM_ID, mDataSet.get(getPosition()));
+                        intent.putExtras(arguments);
                         context.startActivity(intent);
                     }
                 }
