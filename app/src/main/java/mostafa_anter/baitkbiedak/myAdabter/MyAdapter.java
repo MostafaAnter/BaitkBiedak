@@ -43,7 +43,9 @@ import mostafa_anter.baitkbiedak.activities.DetailsActivity;
 import mostafa_anter.baitkbiedak.activities.MainActivity;
 import mostafa_anter.baitkbiedak.fragments.DetailsFragment;
 import mostafa_anter.baitkbiedak.fragments.ItemsFragment;
+import mostafa_anter.baitkbiedak.models.FavoriteModel;
 import mostafa_anter.baitkbiedak.models.FeedPOJO;
+import mostafa_anter.baitkbiedak.store.FavoriteStore;
 import mostafa_anter.baitkbiedak.utils.SquaredImageView;
 import mostafa_anter.baitkbiedak.utils.Utils;
 
@@ -94,7 +96,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implem
             updateHeartButton(holder, true);
         }
         // add to my database
-        //addItem(position);
+        addItem(holder.getPosition());
 
     }
 
@@ -257,9 +259,21 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implem
         viewHolder.getFavorite().setTag(viewHolder);
         if(position == lastCheckedPosition) {
             viewHolder.getFavorite().setImageResource(R.drawable.ic_favorite_24dp);
+        }else if (new FavoriteStore(mContext).findItem(mDataSet.get(position).getId(),
+                mDataSet.get(position).getTitle())){
+            // this item is in my database
+            viewHolder.getFavorite().setImageResource(R.drawable.ic_favorite_24dp);
         }else {
             viewHolder.getFavorite().setImageResource(R.drawable.ic_favorite_outline_24dp);
         }
+    }
+
+    private void addItem(int position) {
+        //add item to favorite
+        FavoriteModel item = new FavoriteModel();
+        item.setTitleKey(mDataSet.get(position).getTitle());
+        item.setIdValue(mDataSet.get(position).getId());
+        new FavoriteStore(mContext).update(item);
     }
 
     // Return the size of your dataset (invoked by the layout manager)

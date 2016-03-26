@@ -22,6 +22,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import mostafa_anter.baitkbiedak.R;
 import mostafa_anter.baitkbiedak.models.FeedPOJO;
+import mostafa_anter.baitkbiedak.utils.Utils;
 
 
 /**
@@ -86,7 +87,7 @@ public class DetailsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_details, container, false);
         ButterKnife.bind(this, view);
         title.setText(feedPOJO.getTitle());
-        timeStamp.setText(feedPOJO.getTimeStamp());
+        timeStamp.setText(Utils.manipulateDateFormat(feedPOJO.getTimeStamp()));
         description.setText(feedPOJO.getDescription());
         status.setText(feedPOJO.getContent());
         return view;

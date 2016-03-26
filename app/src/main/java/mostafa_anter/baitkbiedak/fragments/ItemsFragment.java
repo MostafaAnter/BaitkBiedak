@@ -36,9 +36,11 @@ import mostafa_anter.baitkbiedak.R;
 import mostafa_anter.baitkbiedak.activities.Registration;
 import mostafa_anter.baitkbiedak.app.AppController;
 import mostafa_anter.baitkbiedak.constants.Constants;
+import mostafa_anter.baitkbiedak.models.FavoriteModel;
 import mostafa_anter.baitkbiedak.models.FeedPOJO;
 import mostafa_anter.baitkbiedak.myAdabter.MyAdapter;
 import mostafa_anter.baitkbiedak.parser.JsonParser;
+import mostafa_anter.baitkbiedak.store.FavoriteStore;
 
 
 /**
@@ -108,6 +110,9 @@ public class ItemsFragment extends Fragment {
                 return true;
             case R.id.menu_top_rated:
                 startActivity(new Intent(getActivity(), Registration.class));
+                return true;
+            case R.id.menu_favorite:
+                showFavoriteItemsOnly(new FavoriteStore(getActivity()).findAll());
                 return true;
         }
 
@@ -349,5 +354,23 @@ public class ItemsFragment extends Fragment {
             mDataset.clear();
             mAdapter.notifyDataSetChanged();
         }
+    }
+
+    private void showFavoriteItemsOnly(List<FavoriteModel> list){
+        List<FeedPOJO> mList = new ArrayList<>();
+        for(FavoriteModel model : list){
+            String id = model.getIdValue();
+            for (FeedPOJO moviesPojo : mDataset){
+                if(id.equalsIgnoreCase(moviesPojo.getId())){
+                    mList.add(moviesPojo);
+                }
+            }
+        }
+        clearDataSet();
+        for (FeedPOJO moviesPojo : mList){
+            mDataset.add(moviesPojo);
+            mAdapter.notifyItemInserted(mDataset.size()-1);
+        }
+
     }
 }
