@@ -340,9 +340,6 @@ public class ItemsFragment extends Fragment {
 
         };
 
-        // enable cache
-        strReq.setShouldCache(true);
-
         // Adding request to request queue
         AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
 

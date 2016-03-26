@@ -46,4 +46,18 @@ public class JsonParser{
 
     }
 
+    public static String parseForNotifecation(String feed){
+        try {
+            JSONObject  jsonRootObject = new JSONObject(feed);//done
+            //Get the instance of JSONArray that contains JSONObjects
+            JSONArray jsonNewsArray = jsonRootObject.optJSONArray("data");
+            JSONObject jsonObject = jsonNewsArray.getJSONObject(0);
+            String title = jsonObject.optString("title");
+            return title;
+        }catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 }
