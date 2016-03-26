@@ -29,4 +29,8 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:23.2.0'
     // picasso
     compile 'com.squareup.picasso:picasso:2.5.2'
+    // butter knife
+    compile 'com.jakewharton:butterknife:7.0.1'
+    // volley
+    compile 'com.mcxiaoke.volley:library-aar:1.0.0'
 }

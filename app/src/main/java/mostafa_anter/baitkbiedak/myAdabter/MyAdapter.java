@@ -11,6 +11,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
 import android.text.TextUtils;
+import android.text.format.DateUtils;
 import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,17 +20,23 @@ import android.view.ViewGroup;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.OvershootInterpolator;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import mostafa_anter.baitkbiedak.R;
 import mostafa_anter.baitkbiedak.activities.DetailsActivity;
 import mostafa_anter.baitkbiedak.activities.MainActivity;
@@ -46,7 +53,7 @@ import mostafa_anter.baitkbiedak.utils.Utils;
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implements View.OnClickListener {
     private static final String TAG = "CustomAdapter";
     private static Context mContext;
-    private FeedPOJO[] mDataSet;
+    private List<FeedPOJO> mDataSet;
 
     // manage enter animate
     private static final int ANIMATED_ITEMS_COUNT = 2; // number of item that animated is 1
@@ -70,7 +77,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implem
      * @param mDataSet String[] containing the data to populate views to be used by RecyclerView.
      * @param mContext Context hold context
      */
-    public MyAdapter(Context mContext, FeedPOJO[] mDataSet) {
+    public MyAdapter(Context mContext, List<FeedPOJO> mDataSet) {
         this.mDataSet = mDataSet;
         this.mContext = mContext;
     }
@@ -79,7 +86,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implem
     public void onClick(View v) {
         ViewHolder holder = (ViewHolder) v.getTag();
         lastCheckedPosition = holder.getPosition();
-        notifyItemRangeChanged(0, mDataSet.length);
+        notifyItemRangeChanged(0, mDataSet.size());
 
         if (!likedPositions.contains(holder.getPosition())) {
             likedPositions.add(holder.getPosition());
@@ -94,17 +101,19 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implem
      * Provide a reference to the type of views (custom ViewHolder)
      */
     public static class ViewHolder extends RecyclerView.ViewHolder{
-        private final TextView mainTitel;
-        private final TextView timeStamp;
-        private final TextView textStatusMsg;
-        private final TextView textUrl;
-        private final SquaredImageView imageView;
-
-        private final ImageButton favorite;
-        private final ProgressBar mProgress;
+        @Bind(R.id.main_title) TextView mainTitel;
+        @Bind(R.id.timestamp) TextView timeStamp;
+        @Bind(R.id.txtStatusMsg) TextView textStatusMsg;
+        @Bind(R.id.txtUrl) TextView textUrl;
+        @Bind(R.id.feedImage1) SquaredImageView imageView;
+        @Bind(R.id.txtDescription) TextView description;
+        @Bind(R.id.favorite_button) ImageButton favorite;
+        @Bind(R.id.progressBar) ProgressBar mProgress;
 
         public ViewHolder(View v) {
             super(v);
+            ButterKnife.bind(this, v);
+
             // Define click listener for the ViewHolder's View.
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -127,13 +136,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implem
                     }
                 }
             });
-            mainTitel = (TextView) v.findViewById(R.id.main_title);
-            timeStamp = (TextView) v.findViewById(R.id.timestamp);
-            textStatusMsg = (TextView) v.findViewById(R.id.txtStatusMsg);
-            textUrl = (TextView) v.findViewById(R.id.txtUrl);
-            imageView = (SquaredImageView) v.findViewById(R.id.feedImage1);
-            favorite = (ImageButton) v.findViewById(R.id.favorite_button);
-            mProgress = (ProgressBar) v.findViewById(R.id.progressBar);
         }
 
         public TextView getMainTitel() {
@@ -156,9 +158,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implem
             return imageView;
         }
 
-
         public ImageButton getFavorite() {
             return favorite;
+        }
+
+
+        public TextView getDescription() {
+            return description;
         }
 
         public ProgressBar getProgressBar(){
@@ -186,12 +192,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implem
 
         // Get element from your dataset at this position and replace the contents of the view
         // with that element
-        viewHolder.getMainTitel().setText(mDataSet[position].getTitle());
-        viewHolder.getTimeStamp().setText(mDataSet[position].getTimeStamp());
+        viewHolder.getMainTitel().setText(mDataSet.get(position).getTitle());
+        viewHolder.getTimeStamp().setText(Utils.manipulateDateFormat(mDataSet.get(position).getTimeStamp()));
+        viewHolder.getDescription().setText(mDataSet.get(position).getDescription());
 
         // Chcek for empty status message
-        if (!TextUtils.isEmpty(mDataSet[position].getContent())) {
-            viewHolder.getTextStatusMsg().setText(mDataSet[position].getContent());
+        if (!TextUtils.isEmpty(mDataSet.get(position).getContent())) {
+            viewHolder.getTextStatusMsg().setText(mDataSet.get(position).getContent());
+            viewHolder.getTextStatusMsg().setVisibility(View.VISIBLE);
             if (ItemsFragment.type == 0) {
                 viewHolder.getTextStatusMsg().setVisibility(View.GONE);
             }
@@ -202,9 +210,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implem
         }
 
         // Checking for null feed url
-        if (mDataSet[position].getLinkAttachedWithContent() != null) {
-            viewHolder.getTextUrl().setText(Html.fromHtml("<a href=\"" + mDataSet[position].getLinkAttachedWithContent() + "\">"
-                    + mDataSet[position].getLinkAttachedWithContent() + "</a> "));
+        if (mDataSet.get(position).getLinkAttachedWithContent() != null) {
+            viewHolder.getTextUrl().setText(Html.fromHtml("<a href=\"" + mDataSet.get(position).getLinkAttachedWithContent() + "\">"
+                    + mDataSet.get(position).getLinkAttachedWithContent() + "</a> "));
             // Making url clickable
             viewHolder.getTextUrl().setMovementMethod(LinkMovementMethod.getInstance());
             if (ItemsFragment.type == 0) {
@@ -217,11 +225,11 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implem
         }
 
         // Feed image
-        if (mDataSet[position].getImageUrl() != null) {
+        if (mDataSet.get(position).getImageUrl() != null) {
             // show progressBar
             viewHolder.getProgressBar().setVisibility(View.VISIBLE);
             // Adapter re-use is automatically detected and the previous download canceled.
-            Picasso.with(mContext).load(mDataSet[position].getImageUrl())
+            Picasso.with(mContext).load(mDataSet.get(position).getImageUrl())
                     .placeholder(R.drawable.rectangle)
                     .into(viewHolder.getImageView(), new com.squareup.picasso.Callback() {
                         @Override
@@ -255,7 +263,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implem
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
-        return mDataSet.length;
+        return mDataSet.size();
     }
 
     // manage enter animation function
@@ -324,6 +332,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> implem
     private void resetLikeAnimationState(ViewHolder holder) {
         likeAnimations.remove(holder);
     }
+
+
 
 
 

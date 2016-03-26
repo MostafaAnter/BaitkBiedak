@@ -32,7 +32,8 @@
                 android:maxLines="1"
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/feed_item_profile_name"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:ellipsize="end" />
 
             <TextView
                 android:id="@+id/timestamp"
@@ -44,16 +45,26 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/txtStatusMsg"
+            android:id="@+id/txtDescription"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="5dp"
             android:paddingLeft="@dimen/feed_item_status_pad_left_right"
             android:paddingRight="@dimen/feed_item_status_pad_left_right"
             android:paddingTop="@dimen/feed_item_status_pad_top"
-
+            android:textColor="#203040"
             android:ellipsize="end"
-            android:maxLines="2"/>
+            android:maxLines="2" />
+
+        <TextView
+            android:id="@+id/txtStatusMsg"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="5dp"
+            android:paddingLeft="@dimen/feed_item_status_pad_left_right"
+            android:paddingRight="@dimen/feed_item_status_pad_left_right"
+            android:ellipsize="end"
+            android:maxLines="3" />
 
         <TextView
             android:id="@+id/txtUrl"
