@@ -76,7 +76,7 @@ public class BaitkBiedakService extends IntentService {
         Intent i = new Intent(this, MainActivity.class);
         i.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
         PendingIntent intent = PendingIntent.getActivity(this, 0, i,
-                PendingIntent.FLAG_UPDATE_CURRENT);
+                PendingIntent.FLAG_UPDATE_CURRENT|PendingIntent.FLAG_ONE_SHOT);
         builder.setContentIntent(intent);
 
         // Sets the ticker text
@@ -100,6 +100,8 @@ public class BaitkBiedakService extends IntentService {
 
         // Set text on a TextView in the RemoteViews programmatically.
         contentView.setTextViewText(R.id.textView, message);
+
+
 
         /* Workaround: Need to set the content view here directly on the notification.
          * NotificationCompatBuilder contains a bug that prevents this from working on platform

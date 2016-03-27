@@ -32,7 +32,7 @@ dependencies {
     // butter knife
     compile 'com.jakewharton:butterknife:7.0.1'
     // volley
-    compile 'com.mcxiaoke.volley:library-aar:1.0.0'
+    compile 'com.mcxiaoke.volley:library:1.0.18'
     //sweet dialog
     compile 'cn.pedant.sweetalert:library:1.3'
 }

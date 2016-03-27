@@ -16,12 +16,12 @@
     <item
         android:id="@+id/menu_top_rated"
         android:icon="@drawable/ic_assignment_turned_in_24dp"
-        android:title="Register"
+        android:title="الإنضمام"
         app:showAsAction="always|withText" />
     <item
         android:id="@+id/menu_favorite"
         android:icon="@drawable/ic_favorite_outline_24dp"
-        android:title="Favorite"
+        android:title="المفضله"
         app:showAsAction="always|withText" />
 
      </menu>

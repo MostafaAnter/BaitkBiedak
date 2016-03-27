@@ -42,4 +42,10 @@ public class DetailsActivity extends AppCompatActivity {
 
 
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.push_left_enter, R.anim.push_left_exit);
+    }
 }

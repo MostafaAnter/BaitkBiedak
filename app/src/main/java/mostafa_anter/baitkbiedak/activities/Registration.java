@@ -91,16 +91,16 @@ public class Registration extends AppCompatActivity {
                     }else {
                         // show error message
                         new SweetAlertDialog(Registration.this, SweetAlertDialog.ERROR_TYPE)
-                                .setTitleText("Oops...")
-                                .setContentText("Please complete data field")
+                                .setTitleText("خطأ...")
+                                .setContentText("أكمل ادخال البيانات")
                                 .show();
                     }
 
                 } else {
                     // show error message
                     new SweetAlertDialog(Registration.this, SweetAlertDialog.ERROR_TYPE)
-                            .setTitleText("Oops...")
-                            .setContentText("Please check your Network connection!")
+                            .setTitleText("خطأ")
+                            .setContentText("تأكد انك متصل بالانترنت")
                             .show();
                 }
             }
@@ -115,8 +115,8 @@ public class Registration extends AppCompatActivity {
         } else {
             // show error message
             new SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE)
-                    .setTitleText("Oops...")
-                    .setContentText("Please check your Network connection!")
+                    .setTitleText("خطأ")
+                    .setContentText("تأكد انك متصل بالانترنت")
                     .show();
         }
 
@@ -131,6 +131,7 @@ public class Registration extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 NavUtils.navigateUpFromSameTask(Registration.this);
+                overridePendingTransition(R.anim.push_left_enter, R.anim.push_left_exit);
             }
         });
 
@@ -290,7 +291,7 @@ public class Registration extends AppCompatActivity {
         // Set up a progress dialog
         final SweetAlertDialog pDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
         pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
-        pDialog.setTitleText("Loading...");
+        pDialog.setTitleText("جارى تحميل مناطق المحافظه..");
         pDialog.setCancelable(false);
         pDialog.show();
 
@@ -383,7 +384,7 @@ public class Registration extends AppCompatActivity {
         // Set up a progress dialog
         final SweetAlertDialog pDialog = new SweetAlertDialog(this, SweetAlertDialog.PROGRESS_TYPE);
         pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
-        pDialog.setTitleText("Loading...");
+        pDialog.setTitleText("انتظر قليلا..");
         pDialog.setCancelable(false);
         pDialog.show();
 
@@ -400,8 +401,8 @@ public class Registration extends AppCompatActivity {
                 pDialog.hide();
 
                 new SweetAlertDialog(Registration.this, SweetAlertDialog.SUCCESS_TYPE)
-                        .setTitleText("Good job!")
-                        .setContentText("Now you are Registered!")
+                        .setTitleText("تم بنجاح")
+                        .setContentText("انت الان قمت بالتسجيل")
                         .show();
 
 
@@ -474,4 +475,9 @@ public class Registration extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.push_left_enter, R.anim.push_left_exit);
+    }
 }
