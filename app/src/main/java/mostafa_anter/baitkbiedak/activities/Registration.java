@@ -414,6 +414,11 @@ public class Registration extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
                 pDialog.hide();
+                // show error message
+                new SweetAlertDialog(Registration.this, SweetAlertDialog.ERROR_TYPE)
+                        .setTitleText("خطأ")
+                        .setContentText("الأتصال ضعيف اعد المحاوله")
+                        .show();
             }
         }){
 

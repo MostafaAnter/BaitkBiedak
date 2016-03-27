@@ -32,6 +32,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
 import mostafa_anter.baitkbiedak.R;
 import mostafa_anter.baitkbiedak.activities.Registration;
 import mostafa_anter.baitkbiedak.app.AppController;
@@ -327,6 +328,11 @@ public class ItemsFragment extends Fragment {
             public void onErrorResponse(VolleyError error) {
                 VolleyLog.d(TAG, "Error: " + error.getMessage());
                 onRefreshComplete();
+                // show error message
+                new SweetAlertDialog(getActivity(), SweetAlertDialog.ERROR_TYPE)
+                        .setTitleText("خطأ")
+                        .setContentText("الأتصال ضعيف اعد المحاوله")
+                        .show();
 
             }
         }){
