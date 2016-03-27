@@ -12,8 +12,8 @@ android {
         versionName "1.0"
     }
     buildTypes {
-        release {
-            minifyEnabled false
+        all {
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -33,4 +33,6 @@ dependencies {
     compile 'com.jakewharton:butterknife:7.0.1'
     // volley
     compile 'com.mcxiaoke.volley:library-aar:1.0.0'
+    //sweet dialog
+    compile 'cn.pedant.sweetalert:library:1.3'
 }

@@ -1,5 +1,7 @@
 package mostafa_anter.baitkbiedak.parser;
 
+import android.content.Context;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -9,6 +11,8 @@ import java.util.List;
 
 import mostafa_anter.baitkbiedak.constants.Constants;
 import mostafa_anter.baitkbiedak.models.FeedPOJO;
+import mostafa_anter.baitkbiedak.models.SpinnerItem;
+import mostafa_anter.baitkbiedak.store.SpinnerItemStore;
 
 /**
  * Created by mostafa on 20/03/16.
@@ -58,6 +62,36 @@ public class JsonParser{
             e.printStackTrace();
             return null;
         }
+    }
+
+    public static String[] parseSpinnerItems(Context mContext, String feed){
+        try {
+            JSONObject  jsonRootObject = new JSONObject(feed);//done
+            //Get the instance of JSONArray that contains JSONObjects
+            JSONArray jsonNewsArray = jsonRootObject.optJSONArray("data");
+            String[] newsList = new String[jsonNewsArray.length()];
+            for (int i = 0; i < jsonNewsArray.length(); i++) {
+                JSONObject jsonObject = jsonNewsArray.getJSONObject(i);
+
+                // retrieve all metadata
+                String id = jsonObject.optString("id");
+                String title = jsonObject.optString("title");
+
+                // save in shared
+                SpinnerItem spinnerItem = new SpinnerItem();
+                spinnerItem.setIdValue(id);
+                spinnerItem.setTitleKey(title);
+                new SpinnerItemStore(mContext).update(spinnerItem);
+
+
+                newsList[i] = title;
+            }
+            return newsList;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
+
     }
 
 }

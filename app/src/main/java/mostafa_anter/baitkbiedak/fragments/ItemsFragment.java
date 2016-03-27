@@ -110,6 +110,7 @@ public class ItemsFragment extends Fragment {
                 return true;
             case R.id.menu_top_rated:
                 startActivity(new Intent(getActivity(), Registration.class));
+                getActivity().overridePendingTransition(R.anim.push_left_enter, R.anim.push_left_exit);
                 return true;
             case R.id.menu_favorite:
                 showFavoriteItemsOnly(new FavoriteStore(getActivity()).findAll());
