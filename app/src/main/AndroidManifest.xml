@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="mostafa_anter.baitkbiedak">
+    package="mahmoudabdelshafy.baitkbiedak">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
-        android:name=".app.AppController"
+        android:name="mahmoudabdelshafy.baitkbiedak.app.AppController"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -15,7 +15,7 @@
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
         <activity
-            android:name=".activities.SplashScreen"
+            android:name="mahmoudabdelshafy.baitkbiedak.activities.SplashScreen"
             android:theme="@style/AppTheme.NoActionBar"
             android:configChanges="orientation|keyboardHidden|screenSize">
             <intent-filter>
@@ -25,30 +25,30 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.DetailsActivity"
+            android:name="mahmoudabdelshafy.baitkbiedak.activities.DetailsActivity"
             android:label="@string/title_activity_details"
             android:theme="@style/AppTheme.NoActionBar"
             android:configChanges="orientation|keyboardHidden|screenSize">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activities.MainActivity" />
+                android:value="mahmoudabdelshafy.baitkbiedak.activities.MainActivity" />
         </activity>
         <activity
-            android:name=".activities.MainActivity"
+            android:name="mahmoudabdelshafy.baitkbiedak.activities.MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".activities.Registration"
-            android:parentActivityName=".activities.MainActivity"
+            android:name="mahmoudabdelshafy.baitkbiedak.activities.Registration"
+            android:parentActivityName="mahmoudabdelshafy.baitkbiedak.activities.MainActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:configChanges="orientation|keyboardHidden|screenSize">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="mostafa_anter.baitkbiedak.activities.MainActivity" />
+                android:value="mahmoudabdelshafy.baitkbiedak.activities.MainActivity" />
         </activity>
 
-        <service android:name=".service.BaitkBiedakService" />
+        <service android:name="mahmoudabdelshafy.baitkbiedak.service.BaitkBiedakService" />
         <!-- Broadcast Receiver to handle changes in Network state -->
-        <receiver android:name=".service.BaitkBiedakService$AlarmReceiver" >
+        <receiver android:name="mahmoudabdelshafy.baitkbiedak.service.BaitkBiedakService$AlarmReceiver" >
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
                 <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />

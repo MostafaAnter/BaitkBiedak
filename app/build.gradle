@@ -5,7 +5,7 @@ android {
     buildToolsVersion "23.0.2"
 
     defaultConfig {
-        applicationId "mostafa_anter.baitkbiedak"
+        applicationId "mahmoudabdelshafy.baitkbiedak"
         minSdkVersion 15
         targetSdkVersion 23
         versionCode 1
@@ -31,4 +31,10 @@ dependencies {
     compile 'com.github.ivbaranov:materialfavoritebutton:0.1.2'
     // picasso
     compile 'com.squareup.picasso:picasso:2.5.2'
+    // butter knife
+    compile 'com.jakewharton:butterknife:7.0.1'
+    // volley
+    compile 'com.mcxiaoke.volley:library:1.0.18'
+    //sweet dialog
+    compile 'cn.pedant.sweetalert:library:1.3'
 }

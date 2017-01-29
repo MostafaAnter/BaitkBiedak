@@ -10,7 +10,7 @@
     android:background="#A32638"
     android:orientation="vertical"
     android:gravity="center"
-    tools:context="mostafa_anter.moviesapp.activities.SplashScreen">
+    tools:context="mahmoudabdelshafy.moviesapp.activities.SplashScreen">
 
     <ImageView
         android:id="@+id/splash_image"

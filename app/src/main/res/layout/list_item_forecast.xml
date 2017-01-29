@@ -80,7 +80,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center">
 
-            <mostafa_anter.baitkbiedak.utils.SquaredImageView
+            <mahmoudabdelshafy.baitkbiedak.utils.SquaredImageView
                 android:id="@+id/feedImage1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

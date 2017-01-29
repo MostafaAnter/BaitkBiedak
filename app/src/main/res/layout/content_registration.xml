@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="mostafa_anter.baitkbiedak.activities.Registration"
+    tools:context="mahmoudabdelshafy.baitkbiedak.activities.Registration"
     tools:showIn="@layout/activity_registration">
 
     <ScrollView
@@ -112,7 +112,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal"
-                android:textColor="@color/success_stroke_color"
+                android:textColor="@color/timestamp"
                 android:textStyle="bold"
                 android:text="@string/prompt_governmentation"/>
             <Spinner
@@ -127,7 +127,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal"
-                android:textColor="@color/success_stroke_color"
+                android:textColor="@color/timestamp"
                 android:textStyle="bold"
                 android:text="@string/prompt_regon"/>
             <Spinner
@@ -142,7 +142,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal"
-                android:textColor="@color/success_stroke_color"
+                android:textColor="@color/timestamp"
                 android:textStyle="bold"
                 android:text="@string/prompt_cost"/>
             <Spinner
