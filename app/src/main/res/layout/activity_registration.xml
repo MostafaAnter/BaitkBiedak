@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="mostafa_anter.moviesapp.activities.MainActivity">
+    tools:context="mostafa_anter.baitkbiedak.activities.Registration">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -17,26 +17,26 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay">
-
+            app:popupTheme="@style/AppTheme.PopupOverlay" >
             <TextView
                 android:id="@+id/toolbar_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/app_name"
-                android:gravity="center_vertical"
-                style="@style/TextAppearance.AppCompat.Large" />
-        </android.support.v7.widget.Toolbar>
+                android:text="@string/title_activity_registration"
+                android:textColor="#ffffff"
+                style="?android:attr/textAppearanceLarge" />
+            </android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/activity_main_content" />
+    <include layout="@layout/content_registration" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|start"
+        android:layout_margin="@dimen/fab_margin"
+        android:src="@drawable/ic_send_24dp" />
 
 </android.support.design.widget.CoordinatorLayout>
-
-
-
-
-
-
-
