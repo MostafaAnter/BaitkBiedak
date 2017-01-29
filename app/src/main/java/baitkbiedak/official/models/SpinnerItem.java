@@ -1,0 +1,25 @@
+package baitkbiedak.official.models;
+
+/**
+ * Created by mostafa on 26/03/16.
+ */
+public class SpinnerItem {
+    private String titleKey;
+    private String idValue;
+
+    public String getTitleKey() {
+        return titleKey;
+    }
+
+    public void setTitleKey(String titleKey) {
+        this.titleKey = titleKey;
+    }
+
+    public String getIdValue() {
+        return idValue;
+    }
+
+    public void setIdValue(String idValue) {
+        this.idValue = idValue;
+    }
+}

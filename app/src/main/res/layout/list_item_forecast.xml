@@ -29,6 +29,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:maxLines="1"
+                android:layout_marginTop="5dp"
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/feed_item_profile_name"
                 android:textStyle="bold"
@@ -80,7 +81,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center">
 
-            <mahmoudabdelshafy.baitkbiedak.utils.SquaredImageView
+            <baitkbiedak.official.utils.SquaredImageView
                 android:id="@+id/feedImage1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
